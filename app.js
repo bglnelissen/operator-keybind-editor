@@ -299,10 +299,12 @@ function renderTables() {
   const bySection = {};
   SECTION_ORDER.forEach(s => bySection[s] = []);
 
-  Object.keys(data).forEach(actionKey => {
-    if (actionKey === 'None') return;
+  // Iterate ACTION_META, not the file: .es3 stores actions in an arbitrary order,
+  // while ACTION_META is written in the order the game's own keybind screen uses.
+  Object.keys(ACTION_META).forEach(actionKey => {
+    const entry = data[actionKey];
+    if (!entry || !entry.value) return; // not present in this file
     const meta = ACTION_META[actionKey];
-    if (!meta) return; // unknown action in file, skip silently
     bySection[meta[0]].push({ actionKey, label: meta[1] });
   });
 
