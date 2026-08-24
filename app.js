@@ -216,19 +216,24 @@ document.getElementById('loadOtherBtn').addEventListener('click', () => {
 document.getElementById('resetBtn').addEventListener('click', () => {
   applyDefaultBindings();
   presetSelect.value = '__default';
-  deletePresetBtn.style.display = 'none';
+  syncPresetUi();
   setStatus('Reset to the game’s Default bindings.', 'warn');
 });
 document.getElementById('revertBtn').addEventListener('click', () => {
   data = JSON.parse(JSON.stringify(baseline));
   presetSelect.value = '';
-  deletePresetBtn.style.display = 'none';
+  syncPresetUi();
   renderTables();
   setStatus('Reverted to the uploaded file.', 'warn');
 });
 document.getElementById('printBtn').addEventListener('click', () => {
+  // A printed sheet without a name is unidentifiable a week later, so insist on one.
+  const preset = currentPresetName() || askForPresetName('Name this preset before printing:');
+  if (!preset) { setStatus('Print cancelled — a preset name is needed on the printout.', 'warn'); return; }
+  document.getElementById('printPreset').textContent = ' · ' + preset;
   const meta = document.getElementById('printMeta');
-  meta.textContent = originalFilename + ' · ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  meta.textContent = 'Preset: ' + preset + ' · ' + originalFilename + ' · '
+    + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   window.print();
 });
 document.getElementById('downloadBackupBtn').addEventListener('click', () => {
@@ -274,7 +279,7 @@ function loadParsedContent(text, filename, opts) {
     editorPanel.style.display = '';
     filenameLabel.textContent = originalFilename;
     presetSelect.value = '';
-    deletePresetBtn.style.display = 'none';
+    syncPresetUi();
     renderTables();
     setStatus('File loaded. Click a key badge to change it.', 'ok');
     if (!opts.skipHistory) addRecentUpload(originalFilename, text);
@@ -457,8 +462,10 @@ function buildRow(actionKey, label) {
 function reportRebind(actionKey) {
   const name = ACTION_META[actionKey] ? ACTION_META[actionKey][1] : actionKey;
   const clash = currentConflicts.get(actionKey);
-  if (clash) setStatus('"' + name + '" now clashes with ' + clash.join(', ') + ' — same key and activation type.', 'warn');
-  else setStatus('"' + name + '" updated.', 'ok');
+  dirtySincePreset = true;
+  const saved = autosaveActivePreset() ? ' Saved to preset “' + activePreset + '”.' : '';
+  if (clash) setStatus('"' + name + '" now clashes with ' + clash.join(', ') + ' — same key and activation type.' + saved, 'warn');
+  else setStatus('"' + name + '" updated.' + saved, 'ok');
 }
 
 function renderKeySpan(el, val) {
@@ -561,6 +568,27 @@ document.querySelectorAll('.js-pathrow').forEach(row => {
 const presetSelect = document.getElementById('presetSelect');
 const savePresetBtn = document.getElementById('savePresetBtn');
 const deletePresetBtn = document.getElementById('deletePresetBtn');
+const presetState = document.getElementById('presetState');
+
+const BUILTIN_PRESET_NAMES = { '__default': 'Default', '__numpad': 'Numpad' };
+
+// Name of the custom preset that edits are written straight back into,
+// or null while a built-in preset or a plain uploaded file is on screen.
+let activePreset = null;
+// Whether anything was rebound since the current preset was selected. Only used to
+// decide if a built-in preset's name still describes what is on screen.
+let dirtySincePreset = false;
+
+// Everything about the preset state is derived from the dropdown, so any code that
+// changes the selection only has to call this.
+function syncPresetUi() {
+  const v = presetSelect.value;
+  activePreset = v.startsWith('custom:') ? v.slice(7) : null;
+  dirtySincePreset = false;
+  deletePresetBtn.style.display = activePreset ? '' : 'none';
+  presetState.textContent = activePreset ? 'Auto-saving to “' + activePreset + '”' : '';
+  presetState.className = 'presetstate' + (activePreset ? ' live' : '');
+}
 
 function refreshPresetOptions() {
   const custom = loadCustomPresets();
@@ -577,52 +605,98 @@ function refreshPresetOptions() {
 function applyPresetMap(map) {
   Object.keys(map).forEach(actionKey => {
     if (!data[actionKey]) return;
-    data[actionKey].value.PrimaryKey = map[actionKey][0];
-    data[actionKey].value.PreliminaryKey = map[actionKey][1];
+    const entry = map[actionKey];
+    data[actionKey].value.PrimaryKey = entry[0];
+    data[actionKey].value.PreliminaryKey = entry[1];
+    // Presets stored before activation types were included only carry two values.
+    if (entry.length > 2) data[actionKey].value.PressType = entry[2];
   });
   renderTables();
 }
 
+// The whole editable config, in the shape presets are stored in.
+function captureCurrentMap() {
+  const map = {};
+  Object.keys(data).forEach(actionKey => {
+    if (actionKey === 'None' || !ACTION_META[actionKey]) return;
+    const val = data[actionKey].value;
+    map[actionKey] = [val.PrimaryKey, val.PreliminaryKey, val.PressType];
+  });
+  return map;
+}
+
+function storePreset(name) {
+  const custom = loadCustomPresets();
+  custom[name] = captureCurrentMap();
+  saveCustomPresets(custom);
+  refreshPresetOptions();
+  presetSelect.value = 'custom:' + name;
+  syncPresetUi();
+}
+
+// A custom preset is live: once it is selected, every edit lands in it without a save step.
+function autosaveActivePreset() {
+  if (!activePreset) return false;
+  const custom = loadCustomPresets();
+  custom[activePreset] = captureCurrentMap();
+  saveCustomPresets(custom);
+  return true;
+}
+
+// The name that describes what is currently on screen, or null if it has none:
+// a custom preset always, a built-in one only as long as nothing was rebound.
+function currentPresetName() {
+  if (activePreset) return activePreset;
+  const builtin = BUILTIN_PRESET_NAMES[presetSelect.value];
+  return builtin && !dirtySincePreset ? builtin : null;
+}
+
+function suggestPresetName() {
+  const custom = loadCustomPresets();
+  let name = 'My bindings', n = 1;
+  while (custom[name]) name = 'My bindings ' + (++n);
+  return name;
+}
+
+// Returns the stored name, or null if the user cancelled.
+function askForPresetName(message) {
+  const name = (prompt(message, suggestPresetName()) || '').trim();
+  if (!name) return null;
+  if (loadCustomPresets()[name] && !confirm('Preset "' + name + '" already exists. Overwrite it?')) return null;
+  storePreset(name);
+  return name;
+}
+
 presetSelect.addEventListener('change', () => {
   const v = presetSelect.value;
-  deletePresetBtn.style.display = v.startsWith('custom:') ? '' : 'none';
+  syncPresetUi();
   if (v === '__default') { applyDefaultBindings(); setStatus('Default preset applied.', 'ok'); }
   else if (v === '__numpad') { applyPresetMap(PRESET_NUMPAD); setStatus('Numpad preset applied.', 'ok'); }
-  else if (v.startsWith('custom:')) {
-    const name = v.slice(7);
+  else if (activePreset) {
     const custom = loadCustomPresets();
-    if (custom[name]) { applyPresetMap(custom[name]); setStatus('Preset "' + name + '" applied.', 'ok'); }
+    if (custom[activePreset]) {
+      applyPresetMap(custom[activePreset]);
+      setStatus('Preset "' + activePreset + '" applied — every change is now saved to it automatically.', 'ok');
+    }
   }
 });
 
 savePresetBtn.addEventListener('click', () => {
-  const name = prompt('Name for this preset:');
+  const name = askForPresetName('Name for this preset:');
   if (!name) return;
-  const map = {};
-  Object.keys(data).forEach(actionKey => {
-    if (actionKey === 'None' || !ACTION_META[actionKey]) return;
-    map[actionKey] = [data[actionKey].value.PrimaryKey, data[actionKey].value.PreliminaryKey];
-  });
-  const custom = loadCustomPresets();
-  custom[name] = map;
-  saveCustomPresets(custom);
-  refreshPresetOptions();
-  presetSelect.value = 'custom:' + name;
-  deletePresetBtn.style.display = '';
-  setStatus('Preset "' + name + '" saved in this browser.', 'ok');
+  setStatus('Preset "' + name + '" saved in this browser. Every change from now on is saved to it automatically.', 'ok');
 });
 
 deletePresetBtn.addEventListener('click', () => {
-  const v = presetSelect.value;
-  if (!v.startsWith('custom:')) return;
-  const name = v.slice(7);
+  if (!activePreset) return;
+  const name = activePreset;
   if (!confirm('Delete preset "' + name + '"?')) return;
   const custom = loadCustomPresets();
   delete custom[name];
   saveCustomPresets(custom);
   refreshPresetOptions();
   presetSelect.value = '';
-  deletePresetBtn.style.display = 'none';
+  syncPresetUi();
   setStatus('Preset "' + name + '" deleted.', 'warn');
 });
 
@@ -733,6 +807,7 @@ function loadDefaults(opts) {
   return fetchDefaultFile().then(parsed => {
     loadParsedContent(JSON.stringify(parsed, null, '\t'), 'KeyBinds.es3', { skipHistory: true });
     presetSelect.value = '__default';
+    syncPresetUi();
     setStatus(opts.silent
       ? 'Loaded the game’s default bindings. Upload your own file to edit it.'
       : 'Default bindings loaded.', 'ok');

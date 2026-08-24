@@ -464,6 +464,22 @@ tbody tr.has-conflict{background:rgba(192,57,43,0.09);}
 .typeselect option{background:var(--panel2);color:var(--text);}
 .type-print{display:none;}
 
+/* Reassurance that edits are landing in the selected preset without a save step. */
+.presetstate{
+  font-size:10.5px;
+  letter-spacing:1px;
+  color:var(--text-dim);
+  text-transform:uppercase;
+  align-self:center;
+}
+.presetstate.live{color:var(--accent);}
+.presetstate.live::before{
+  content:'●';
+  margin-right:5px;
+  font-size:9px;
+  vertical-align:1px;
+}
+
 .overlay{
   position:fixed;inset:0;
   background:rgba(0,0,0,0.7);
@@ -565,6 +581,10 @@ footer{
     font-weight:800;
     letter-spacing:2.5pt;
     color:#000;
+  }
+  .print-preset{
+    font-weight:600;
+    letter-spacing:1.5pt;
   }
   .print-meta{
     font-size:7pt;

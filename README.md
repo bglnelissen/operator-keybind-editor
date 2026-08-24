@@ -14,11 +14,14 @@ Everything runs client-side. No file is ever uploaded to a server.
 - **Click-to-rebind** — click a key badge, press any key or mouse button. Modifier combos
   (e.g. `Shift` + `T`) are supported.
 - **Activation types** — Press, Release, Hold, Double Click and Hold Delayed are editable per action.
-- **Presets** — Default and Numpad are built in; save your own under any name.
+- **Presets** — Default and Numpad are built in and read-only. Save your own under any name and
+  it becomes *live*: every rebind and activation-type change is written back to it immediately,
+  no save step.
 - **Keyboard map on hover** — hovering a binding highlights the physical key on a schematic
   full-size keyboard (main block, navigation cluster, arrows, numpad).
 - **Recent uploads** — previously loaded files stay available so you can switch back.
-- **Print / PDF export** — all bindings on a single A4 sheet (landscape).
+- **Print / PDF export** — all bindings on a single A4 sheet, headed with the preset name.
+  A config that has no name yet is named first, which also stores it as a preset.
 
 ## Where to find your keybinds file
 
