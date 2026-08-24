@@ -488,6 +488,21 @@ function stopCapture() {
   overlay.classList.remove('show');
 }
 
+// A tap on a touchscreen also fires a synthetic mousedown; without this it would bind Mouse 0.
+let lastPointerType = 'mouse';
+window.addEventListener('pointerdown', e => { lastPointerType = e.pointerType; }, true);
+
+// Touch devices have no Esc key, so the overlay needs a way out that isn't a keypress.
+// The X and a tap on the backdrop both cancel; a real mouse click on the backdrop still binds.
+const captureCancelBtn = document.getElementById('captureCancel');
+captureCancelBtn.addEventListener('click', e => { e.stopPropagation(); stopCapture(); });
+overlay.addEventListener('click', e => {
+  if (!capturingEl) return;
+  if (lastPointerType === 'mouse') return;
+  if (e.target.closest('.overlay-box') && e.target !== captureCancelBtn) return;
+  stopCapture();
+});
+
 window.addEventListener('keydown', e => {
   if (!capturingEl) return;
   e.preventDefault();
@@ -513,6 +528,8 @@ window.addEventListener('keydown', e => {
 
 window.addEventListener('mousedown', e => {
   if (!capturingEl) return;
+  if (lastPointerType !== 'mouse') return;      // a finger tap is not a mouse button
+  if (e.target.closest('#captureCancel')) return;
   e.preventDefault();
   const unity = MOUSEBUTTON_TO_UNITY[e.button];
   if (unity === undefined) return;

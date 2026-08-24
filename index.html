@@ -15,6 +15,12 @@
     <div class="sub">Upload · Edit · Download</div>
   </header>
 
+  <div class="mobilenote">
+    <b>Best opened on your PC.</b> Rebinding needs a real keyboard, and the edited file has to go back
+    into the game's save folder on the machine that runs OPERATOR. On a phone you can look around,
+    but you can't finish the job.
+  </div>
+
   <div class="panel" id="uploadPanel">
     <div class="dropzone" id="dropzone">
       <div class="big">Drop your <b>KeyBinds.es3</b> here, or click to browse</div>
@@ -85,8 +91,10 @@
 
 <div class="overlay" id="captureOverlay">
   <div class="overlay-box">
+    <button class="overlay-close" id="captureCancel" type="button" aria-label="Cancel rebinding">✕</button>
     <div class="title">Press a key or mouse button…</div>
-    <div class="hint">Esc to cancel</div>
+    <div class="hint hint-key">Esc to cancel</div>
+    <div class="hint hint-touch">Tap ✕ to cancel</div>
   </div>
 </div>
 
