@@ -431,9 +431,7 @@ footer{
 .print-header{display:none;}
 
 /* ---- Print / PDF (A4) -------------------------------------------------- */
-/* Landscape + 3 columns is what makes all 59 bindings fit on a single sheet
-   while keeping the columns wide enough that no row wraps. */
-@page{ size:A4 landscape; margin:9mm 10mm; }
+@page{ size:A4 portrait; margin:10mm; }
 
 @media print{
   body{
@@ -457,8 +455,8 @@ footer{
 
   .print-header{
     display:block;
-    margin-bottom:3mm;
-    padding-bottom:1.5mm;
+    margin-bottom:2mm;
+    padding-bottom:1.2mm;
     border-bottom:1.2pt solid #000;
   }
   .print-title{
@@ -476,15 +474,15 @@ footer{
 
   .grid{
     display:block;
-    column-count:3;
-    column-gap:6mm;
+    column-count:2;
+    column-gap:7mm;
     margin:0;
   }
   .section{
     background:none !important;
     border:0.75pt solid #999;
     border-radius:0;
-    margin:0 0 2.4mm 0;
+    margin:0 0 2mm 0;
     /* keep a section on one page/column */
     break-inside:avoid;
     page-break-inside:avoid;
@@ -510,7 +508,7 @@ footer{
   tbody tr{border-bottom:0.4pt solid #ddd;}
   tbody tr.changed{background:none !important;}
   tbody tr:hover{background:none !important;}
-  td{padding:0.7mm 2.5mm;color:#000;}
+  td{padding:0.55mm 2.5mm;color:#000;}
   td.action{color:#000 !important;}
 
   .key{
