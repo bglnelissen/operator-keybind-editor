@@ -293,9 +293,72 @@ function handleFile(file) {
   reader.readAsText(file);
 }
 
+// ---- Conflict detection ---------------------------------------------------
+// Two bindings only clash when key, modifier AND activation type all match.
+// Space/Release (Kick) and Space/Hold Delayed (Vault) coexist fine in-game,
+// as do Mouse 3 Press (Flashlight Toggle) and Mouse 3 Hold (Flashlight Cycle).
+let currentConflicts = new Map();   // actionKey -> [labels of the other actions]
+
+function describeBinding(val, actionKey) {
+  const key = keyLabel(val.PrimaryKey);
+  const combo = val.PreliminaryKey ? keyLabel(val.PreliminaryKey) + ' + ' + key : key;
+  return combo + ' · ' + pressTypeLabel(actionKey, val.PressType);
+}
+
+function findConflicts() {
+  const bySignature = new Map();
+  Object.keys(ACTION_META).forEach(actionKey => {
+    const entry = data[actionKey];
+    if (!entry || !entry.value) return;
+    if (!entry.value.PrimaryKey) return;   // unassigned is never a clash
+    const sig = entry.value.PrimaryKey + '|' + entry.value.PreliminaryKey + '|' + entry.value.PressType;
+    if (!bySignature.has(sig)) bySignature.set(sig, []);
+    bySignature.get(sig).push(actionKey);
+  });
+
+  const byAction = new Map();
+  const groups = [];
+  bySignature.forEach(list => {
+    if (list.length < 2) return;
+    list.forEach(k => byAction.set(k, list.filter(o => o !== k).map(o => ACTION_META[o][1])));
+    groups.push({
+      binding: describeBinding(data[list[0]].value, list[0]),
+      actions: list.map(k => ACTION_META[k][1])
+    });
+  });
+  return { byAction, groups };
+}
+
+function renderConflictBar(groups) {
+  const bar = document.getElementById('conflictBar');
+  if (!groups.length) { bar.style.display = 'none'; bar.innerHTML = ''; return; }
+  bar.style.display = '';
+  bar.innerHTML = '';
+  const title = document.createElement('div');
+  title.className = 'conflictbar-title';
+  title.textContent = groups.length === 1
+    ? '1 binding is assigned twice'
+    : groups.length + ' bindings are assigned more than once';
+  bar.appendChild(title);
+  groups.forEach(g => {
+    const row = document.createElement('div');
+    row.className = 'conflictbar-row';
+    const b = document.createElement('span');
+    b.className = 'conflictbar-key';
+    b.textContent = g.binding;
+    row.appendChild(b);
+    row.appendChild(document.createTextNode(' — ' + g.actions.join(' / ')));
+    bar.appendChild(row);
+  });
+}
+
 // ---- Rendering ------------------------------------------------------------
 function renderTables() {
   sectionsGrid.innerHTML = '';
+  const conflicts = findConflicts();
+  currentConflicts = conflicts.byAction;
+  renderConflictBar(conflicts.groups);
+
   const bySection = {};
   SECTION_ORDER.forEach(s => bySection[s] = []);
 
@@ -345,6 +408,12 @@ function buildRow(actionKey, label) {
   keySpan.dataset.action = actionKey;
   renderKeySpan(keySpan, val);
   keySpan.addEventListener('click', () => startCapture(keySpan, actionKey));
+  const clash = currentConflicts.get(actionKey);
+  if (clash) {
+    keySpan.classList.add('conflict');
+    keySpan.title = 'Same key and activation type as: ' + clash.join(', ');
+    tr.classList.add('has-conflict');
+  }
   tdKey.appendChild(keySpan);
 
   const tdType = document.createElement('td');
@@ -369,7 +438,7 @@ function buildRow(actionKey, label) {
   sel.addEventListener('change', () => {
     data[actionKey].value.PressType = parseInt(sel.value, 10);
     renderTables();
-    setStatus('"' + actionKey + '" activation type set to ' + pressTypeLabel(actionKey, data[actionKey].value.PressType) + '.', 'ok');
+    reportRebind(actionKey);
   });
   tdType.appendChild(sel);
   // Print/PDF output uses plain text instead of the dropdown.
@@ -382,6 +451,14 @@ function buildRow(actionKey, label) {
   tr.appendChild(tdKey);
   tr.appendChild(tdType);
   return tr;
+}
+
+// Call after renderTables(), which is what refreshes currentConflicts.
+function reportRebind(actionKey) {
+  const name = ACTION_META[actionKey] ? ACTION_META[actionKey][1] : actionKey;
+  const clash = currentConflicts.get(actionKey);
+  if (clash) setStatus('"' + name + '" now clashes with ' + clash.join(', ') + ' — same key and activation type.', 'warn');
+  else setStatus('"' + name + '" updated.', 'ok');
 }
 
 function renderKeySpan(el, val) {
@@ -431,7 +508,7 @@ window.addEventListener('keydown', e => {
   renderKeySpan(capturingEl, entry.value);
   stopCapture();
   renderTables();
-  setStatus('"' + actionKey + '" updated.', 'ok');
+  reportRebind(actionKey);
 });
 
 window.addEventListener('mousedown', e => {
@@ -444,20 +521,23 @@ window.addEventListener('mousedown', e => {
   data[actionKey].value.PreliminaryKey = 0;
   stopCapture();
   renderTables();
-  setStatus('"' + actionKey + '" updated.', 'ok');
+  reportRebind(actionKey);
 });
 
-const copyPathBtn = document.getElementById('copyPathBtn');
-copyPathBtn.addEventListener('click', () => {
-  // pathHint is the folder itself, so it pastes straight into the Explorer address bar.
-  const text = document.getElementById('pathHint').textContent.trim();
-  const done = () => {
-    copyPathBtn.textContent = 'Copied!';
-    copyPathBtn.classList.add('copied');
-    setTimeout(() => { copyPathBtn.textContent = 'Copy'; copyPathBtn.classList.remove('copied'); }, 1500);
-  };
-  if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, done);
-  else done();
+// The folder is shown in both the upload panel and the editor, so wire up every copy button.
+document.querySelectorAll('.js-pathrow').forEach(row => {
+  const btn = row.querySelector('.copybtn');
+  const path = row.querySelector('.pathtext');
+  btn.addEventListener('click', () => {
+    // The path is the folder itself, so it pastes straight into the Explorer address bar.
+    const done = () => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+    };
+    if (navigator.clipboard) navigator.clipboard.writeText(path.textContent.trim()).then(done, done);
+    else done();
+  });
 });
 
 // ---- Presets ----------------------------------------------------------

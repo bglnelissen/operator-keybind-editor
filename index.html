@@ -23,9 +23,9 @@
     </div>
     <div class="instructions">
       <b>Where do I find this file?</b><br>
-      <span class="pathrow">
-        <code id="pathHint">%USERPROFILE%\AppData\LocalLow\VECTOR INTERACTIVE\OPERATOR\Saves\Save0\</code>
-        <button class="copybtn" id="copyPathBtn" title="Copy folder path">Copy</button>
+      <span class="pathrow js-pathrow">
+        <code class="pathtext">%USERPROFILE%\AppData\LocalLow\VECTOR INTERACTIVE\OPERATOR\Saves\Save0\</code>
+        <button class="copybtn" title="Copy folder path">Copy</button>
       </span>
       <ol>
         <li>Upload your current <code>KeyBinds.es3</code> here.</li>
@@ -64,7 +64,13 @@
       <button class="btn" id="downloadBackupBtn">Download backup (original)</button>
       <button class="btn btn-primary" id="downloadEditedBtn">Download edited version</button>
     </div>
+    <div class="pathbar js-pathrow">
+      <span class="pathbar-label">Put the downloaded file back into</span>
+      <code class="pathtext">%USERPROFILE%\AppData\LocalLow\VECTOR INTERACTIVE\OPERATOR\Saves\Save0\</code>
+      <button class="copybtn" title="Copy folder path">Copy</button>
+    </div>
     <div class="status" id="statusLine"></div>
+    <div class="conflictbar" id="conflictBar" style="display:none;"></div>
   </div>
 
   <div class="print-header">
