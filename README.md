@@ -14,7 +14,8 @@ Everything runs client-side. No file is ever uploaded to a server.
 - **Click-to-rebind** — click a key badge, press any key or mouse button. Modifier combos
   (e.g. `Shift` + `T`) are supported.
 - **Activation types** — Press, Release, Hold, Double Click and Hold Delayed are editable per action.
-- **Presets** — Default and Numpad are built in and read-only. Save your own under any name and
+- **Presets** — Default and Numpad are built in and read-only. Numpad is a played-in layout that
+  drives movement from the number pad and keeps the mouse hand free. Save your own under any name and
   it becomes *live*: every rebind and activation-type change is written back to it immediately,
   no save step.
 - **Keyboard map on hover** — hovering a binding highlights the physical key on a schematic

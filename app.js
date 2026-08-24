@@ -105,24 +105,24 @@ const ACTION_META = {
   NVGGainIncrease: ['Inventory', 'NV Gain Increase'],
   NVGGainDecrease: ['Inventory', 'NV Gain Decrease'],
 
-  Aim: ['Weapons', 'Aim Weapon'],
-  Shoot: ['Weapons', 'Fire Weapon'],
-  ChamberRound: ['Weapons', 'Chamber Weapon'],
-  CheckChamber: ['Weapons', 'Check Chamber'],
-  Reload: ['Weapons', 'Reload'],
-  EmergencyReload: ['Weapons', 'Emergency Reload'],
-  CheckMag: ['Weapons', 'Check Mag'],
-  Inspect: ['Weapons', 'Inspect Weapon'],
-  Firemode: ['Weapons', 'Cycle Firemode'],
+  Aim: ['Weapons & Optics', 'Aim Weapon'],
+  Shoot: ['Weapons & Optics', 'Fire Weapon'],
+  ChamberRound: ['Weapons & Optics', 'Chamber Weapon'],
+  CheckChamber: ['Weapons & Optics', 'Check Chamber'],
+  Reload: ['Weapons & Optics', 'Reload'],
+  EmergencyReload: ['Weapons & Optics', 'Emergency Reload'],
+  CheckMag: ['Weapons & Optics', 'Check Mag'],
+  Inspect: ['Weapons & Optics', 'Inspect Weapon'],
+  Firemode: ['Weapons & Optics', 'Cycle Firemode'],
 
-  HoldBreath: ['Optics & Sights', 'Hold Breath'],
-  SwitchBetweenSights: ['Optics & Sights', 'Cycle Optics'],
-  CantWeapon: ['Optics & Sights', 'Canted Weapon'],
-  ReticleBrightnessIncrease: ['Optics & Sights', 'Reticle Brightness +'],
-  ReticleBrightnessDecrease: ['Optics & Sights', 'Reticle Brightness −'],
-  ScopeZeroUp: ['Optics & Sights', 'Scope Zero Increase'],
-  ScopeZeroDown: ['Optics & Sights', 'Scope Zero Decrease'],
-  ZoomOptics: ['Optics & Sights', 'Scope Magnifier + Scroll'],
+  HoldBreath: ['Weapons & Optics', 'Hold Breath'],
+  SwitchBetweenSights: ['Weapons & Optics', 'Cycle Optics'],
+  CantWeapon: ['Weapons & Optics', 'Canted Weapon'],
+  ReticleBrightnessIncrease: ['Weapons & Optics', 'Reticle Brightness +'],
+  ReticleBrightnessDecrease: ['Weapons & Optics', 'Reticle Brightness −'],
+  ScopeZeroUp: ['Weapons & Optics', 'Scope Zero Increase'],
+  ScopeZeroDown: ['Weapons & Optics', 'Scope Zero Decrease'],
+  ZoomOptics: ['Weapons & Optics', 'Scope Magnifier + Scroll'],
 
   OpenATAK: ['ATAK (Drone / Tablet)', 'Open'],
   ATAKZoomIn: ['ATAK (Drone / Tablet)', 'Zoom In'],
@@ -136,7 +136,7 @@ const ACTION_META = {
 
   Console: ['Misc', 'Open Console']
 };
-const SECTION_ORDER = ['Movement', 'Tactical Movement', 'Player', 'Comms', 'Inventory', 'Weapons', 'Optics & Sights', 'ATAK (Drone / Tablet)', 'Misc'];
+const SECTION_ORDER = ['Movement', 'Tactical Movement', 'Player', 'Comms', 'Inventory', 'Weapons & Optics', 'ATAK (Drone / Tablet)', 'Misc'];
 
 // ---- Ingebouwde presets (PrimaryKey/PreliminaryKey per actie) -----------
 const PRESET_DEFAULT = {
@@ -157,22 +157,28 @@ const PRESET_DEFAULT = {
   ToggleNVGs: [110, 0], WalkForward: [119, 0], ScopeZeroDown: [281, 0], Vault: [32, 0]
 };
 
+// Taken from a played-in numpad layout, so this one also carries its activation types.
 const PRESET_NUMPAD = {
-  Console: [96, 0], ATAKZoomIn: [39, 0], ATAKZoomMoveRight: [275, 0], ATAKZoomMoveLeft: [276, 0],
-  WalkLeft: [260, 0], Kick: [32, 0], Reload: [325, 0], OpenATAK: [109, 0], RadioChat: [107, 0],
-  VoiceTaunt: [282, 0], SwitchPrimary: [257, 0], FreeLean: [0, 0], CheckMag: [275, 0],
-  ScopeZeroUp: [273, 0], ATAKZoomOut: [59, 0], FlashlightsToggle: [326, 0], CantWeapon: [116, 0],
-  Voicechat: [104, 0], ATAKDropBomb: [305, 0], SwitchSecondary: [259, 0], CheckChamber: [275, 0],
-  ATAKZoomMoveDown: [274, 0], Aim: [324, 0], LeanLeft: [263, 0], NVGGainIncrease: [127, 0],
-  Prone: [256, 0], EmergencyReload: [325, 0], WalkRight: [262, 0], LasersCycle: [327, 0],
-  HealthMenu: [9, 0], Inspect: [275, 0], Run: [271, 0], ATAKZoomMoveUp: [273, 0],
-  DropWeapon: [121, 0], Firemode: [274, 0], ChamberRound: [325, 0], WalkBackward: [261, 0],
-  Freelook: [325, 0], ReticleBrightnessDecrease: [281, 0], ZoomOptics: [308, 0], LeanRight: [265, 0],
-  Sprint: [271, 0], Interact: [270, 0], Shoot: [323, 0], SwitchSpecialPurpose: [259, 0],
-  NVGGainDecrease: [277, 0], ATAKZoomCycleFLIR: [46, 0], ReticleBrightnessIncrease: [280, 0],
-  Crouch: [46, 0], LasersToggle: [327, 0], SwitchGrenades: [268, 0], HoldBreath: [308, 0],
-  FlashlightsCycle: [326, 0], SwitchBetweenSights: [326, 0], SwitchSecondPrimary: [257, 0],
-  ToggleNVGs: [279, 0], WalkForward: [264, 0], ScopeZeroDown: [274, 0], Vault: [32, 0]
+  Console: [96, 0, 0], ATAKZoomIn: [39, 0, 2], ATAKZoomMoveRight: [100, 0, 2],
+  ATAKZoomMoveLeft: [97, 0, 2], WalkLeft: [260, 0, 2], Kick: [258, 0, 1],
+  Reload: [325, 0, 0], OpenATAK: [109, 0, 2], RadioChat: [107, 0, 2],
+  VoiceTaunt: [282, 0, 0], SwitchPrimary: [257, 0, 0], FreeLean: [258, 0, 0],
+  CheckMag: [275, 0, 3], ScopeZeroUp: [273, 0, 2], ATAKZoomOut: [59, 0, 2],
+  FlashlightsToggle: [278, 0, 1], CantWeapon: [327, 0, 1], Voicechat: [104, 0, 2],
+  ATAKDropBomb: [305, 0, 0], SwitchSecondary: [259, 0, 0], CheckChamber: [326, 0, 3],
+  ATAKZoomMoveDown: [115, 0, 2], Aim: [324, 0, 0], LeanLeft: [263, 0, 0],
+  NVGGainIncrease: [127, 0, 0], Prone: [256, 0, 0], EmergencyReload: [325, 0, 3],
+  WalkRight: [262, 0, 2], LasersCycle: [327, 0, 2], HealthMenu: [269, 0, 2],
+  Inspect: [276, 0, 4], Run: [271, 0, 4], ATAKZoomMoveUp: [119, 0, 2],
+  DropWeapon: [121, 0, 0], Firemode: [275, 0, 1], ChamberRound: [326, 0, 2],
+  WalkBackward: [261, 0, 2], Freelook: [300, 0, 0], ReticleBrightnessDecrease: [281, 0, 0],
+  ZoomOptics: [276, 0, 2], LeanRight: [265, 0, 0], Sprint: [271, 0, 3],
+  Interact: [270, 0, 0], Shoot: [323, 0, 2], SwitchSpecialPurpose: [259, 0, 3],
+  NVGGainDecrease: [277, 0, 0], ATAKZoomCycleFLIR: [102, 0, 0], ReticleBrightnessIncrease: [280, 0, 0],
+  Crouch: [46, 0, 0], LasersToggle: [327, 0, 1], SwitchGrenades: [268, 0, 0],
+  HoldBreath: [275, 0, 2], FlashlightsCycle: [278, 0, 2], SwitchBetweenSights: [276, 0, 0],
+  SwitchSecondPrimary: [257, 0, 3], ToggleNVGs: [279, 0, 0], WalkForward: [264, 0, 2],
+  ScopeZeroDown: [274, 0, 2], Vault: [258, 0, 4]
 };
 
 const CUSTOM_PRESETS_KEY = 'operatorKeybindEditor.presets';
