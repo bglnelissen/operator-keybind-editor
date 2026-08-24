@@ -164,7 +164,7 @@ const PRESET_NUMPAD = {
   Reload: [325, 0, 0], OpenATAK: [109, 0, 2], RadioChat: [107, 0, 2],
   VoiceTaunt: [282, 0, 0], SwitchPrimary: [257, 0, 0], FreeLean: [258, 0, 0],
   CheckMag: [275, 0, 3], ScopeZeroUp: [273, 0, 2], ATAKZoomOut: [59, 0, 2],
-  FlashlightsToggle: [278, 0, 1], CantWeapon: [327, 0, 1], Voicechat: [104, 0, 2],
+  FlashlightsToggle: [278, 0, 1], CantWeapon: [267, 0, 1], Voicechat: [104, 0, 2],
   ATAKDropBomb: [305, 0, 0], SwitchSecondary: [259, 0, 0], CheckChamber: [326, 0, 3],
   ATAKZoomMoveDown: [115, 0, 2], Aim: [324, 0, 0], LeanLeft: [263, 0, 0],
   NVGGainIncrease: [127, 0, 0], Prone: [256, 0, 0], EmergencyReload: [325, 0, 3],
