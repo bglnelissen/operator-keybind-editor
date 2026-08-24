@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OPERATOR — Keybind Editor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="title-crt">
+      <h1 data-text="OPERATOR // KEYBIND EDITOR">OPERAT<span>O</span>R <span>//</span> KEYBIND EDITOR</h1>
+    </div>
+    <div class="sub">Upload · Edit · Download</div>
+  </header>
+
+  <div class="panel" id="uploadPanel">
+    <div class="dropzone" id="dropzone">
+      <div class="big">Drop your <b>KeyBinds.es3</b> here, or click to browse</div>
+      <div class="small">Nothing is uploaded to a server — everything stays in your browser.</div>
+      <input type="file" id="fileInput" accept=".es3,.json,.txt">
+    </div>
+    <div class="instructions">
+      <b>Where do I find this file?</b><br>
+      <span class="pathrow">
+        <code id="pathHint">%USERPROFILE%\AppData\LocalLow\VECTOR INTERACTIVE\OPERATOR\Saves\Save0\</code>
+        <button class="copybtn" id="copyPathBtn" title="Copy folder path">Copy</button>
+      </span>
+      <ol>
+        <li>Upload your current <code>KeyBinds.es3</code> here.</li>
+        <li>Click any key badge in the table, then press the new key (or mouse button).</li>
+        <li>Download the <b>backup</b> first (the original), so you can always roll back.</li>
+        <li>Then download the <b>edited file</b> and drop it over the original in the folder above (confirm the overwrite).</li>
+      </ol>
+      <p class="defaultnote">
+        No file handy? The game's factory bindings are bundled with this tool —
+        <a href="KeyBinds.default.es3" download="KeyBinds.es3">download the default KeyBinds.es3</a>,
+        or click <b>Load defaults</b> below to open them straight in the editor.
+      </p>
+      <button class="btn btn-ghost" id="loadDefaultsBtn">Load defaults</button>
+    </div>
+    <div id="recentUploads" style="display:none;"></div>
+  </div>
+
+  <div class="panel" id="editorPanel" style="display:none;">
+    <div class="toolbar">
+      <span class="filename" id="filenameLabel"></span>
+      <label class="presetlabel">Preset:
+        <select id="presetSelect">
+          <option value="">— choose —</option>
+          <option value="__default">Default</option>
+          <option value="__numpad">Numpad</option>
+        </select>
+      </label>
+      <button class="btn btn-ghost" id="savePresetBtn">Save as preset…</button>
+      <button class="btn btn-ghost" id="deletePresetBtn" style="display:none;">Delete preset</button>
+    </div>
+    <div class="toolbar">
+      <button class="btn btn-ghost" id="resetBtn">Reset to Default</button>
+      <button class="btn btn-ghost" id="revertBtn">Revert to uploaded</button>
+      <button class="btn" id="loadOtherBtn">Load another file</button>
+      <button class="btn" id="printBtn">Export to PDF / print</button>
+      <button class="btn" id="downloadBackupBtn">Download backup (original)</button>
+      <button class="btn btn-primary" id="downloadEditedBtn">Download edited version</button>
+    </div>
+    <div class="status" id="statusLine"></div>
+  </div>
+
+  <div class="print-header">
+    <div class="print-title">OPERATOR — Keybinds</div>
+    <div class="print-meta" id="printMeta"></div>
+  </div>
+
+  <div class="grid" id="sectionsGrid"></div>
+
+  <footer>Client-side tool · no data leaves your browser</footer>
+</div>
+
+<div class="overlay" id="captureOverlay">
+  <div class="overlay-box">
+    <div class="title">Press a key or mouse button…</div>
+    <div class="hint">Esc to cancel</div>
+  </div>
+</div>
+
+<div class="kbdpanel" id="kbdPanel">
+  <div class="kbdpanel-label" id="kbdPanelLabel"></div>
+  <div class="kbdgrid" id="kbdGrid"></div>
+</div>
+
+<script src="keyboard.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

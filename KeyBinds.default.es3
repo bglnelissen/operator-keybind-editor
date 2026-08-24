@@ -1,0 +1,482 @@
+{
+	"Console" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 96,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ATAKZoomIn" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 39,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ATAKZoomMoveRight" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 275,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ATAKZoomMoveLeft" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 276,
+		"PreliminaryKey" : 0
+	}
+	},
+	"WalkLeft" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 97,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Kick" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 1,
+		"PrimaryKey" : 32,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Reload" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 1,
+		"PrimaryKey" : 114,
+		"PreliminaryKey" : 0
+	}
+	},
+	"OpenATAK" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 109,
+		"PreliminaryKey" : 0
+	}
+	},
+	"RadioChat" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 107,
+		"PreliminaryKey" : 0
+	}
+	},
+	"VoiceTaunt" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 282,
+		"PreliminaryKey" : 0
+	}
+	},
+	"SwitchPrimary" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 50,
+		"PreliminaryKey" : 0
+	}
+	},
+	"FreeLean" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 306,
+		"PreliminaryKey" : 0
+	}
+	},
+	"CheckMag" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 4,
+		"PrimaryKey" : 114,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ScopeZeroUp" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 280,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ATAKZoomOut" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 59,
+		"PreliminaryKey" : 0
+	}
+	},
+	"FlashlightsToggle" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 1,
+		"PrimaryKey" : 326,
+		"PreliminaryKey" : 0
+	}
+	},
+	"CantWeapon" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 116,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Voicechat" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 104,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ATAKDropBomb" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 305,
+		"PreliminaryKey" : 0
+	}
+	},
+	"SwitchSecondary" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 49,
+		"PreliminaryKey" : 0
+	}
+	},
+	"CheckChamber" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 116,
+		"PreliminaryKey" : 306
+	}
+	},
+	"ATAKZoomMoveDown" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 274,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Aim" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 324,
+		"PreliminaryKey" : 0
+	}
+	},
+	"LeanLeft" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 113,
+		"PreliminaryKey" : 0
+	}
+	},
+	"NVGGainIncrease" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 280,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Prone" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 122,
+		"PreliminaryKey" : 0
+	}
+	},
+	"EmergencyReload" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 6,
+		"PrimaryKey" : 114,
+		"PreliminaryKey" : 0
+	}
+	},
+	"WalkRight" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 100,
+		"PreliminaryKey" : 0
+	}
+	},
+	"LasersCycle" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 327,
+		"PreliminaryKey" : 0
+	}
+	},
+	"HealthMenu" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 9,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Inspect" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 105,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Run" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 4,
+		"PrimaryKey" : 304,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ATAKZoomMoveUp" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 273,
+		"PreliminaryKey" : 0
+	}
+	},
+	"DropWeapon" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 121,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Firemode" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 98,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ChamberRound" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 116,
+		"PreliminaryKey" : 304
+	}
+	},
+	"WalkBackward" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 115,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Freelook" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 325,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ReticleBrightnessDecrease" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 274,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ZoomOptics" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 308,
+		"PreliminaryKey" : 0
+	}
+	},
+	"LeanRight" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 101,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Sprint" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 3,
+		"PrimaryKey" : 304,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Interact" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 102,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Shoot" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 323,
+		"PreliminaryKey" : 0
+	}
+	},
+	"SwitchSpecialPurpose" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 52,
+		"PreliminaryKey" : 0
+	}
+	},
+	"NVGGainDecrease" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 281,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ATAKZoomCycleFLIR" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 46,
+		"PreliminaryKey" : 0
+	}
+	},
+	"None" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 0,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ReticleBrightnessIncrease" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 273,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Crouch" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 99,
+		"PreliminaryKey" : 0
+	}
+	},
+	"LasersToggle" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 1,
+		"PrimaryKey" : 327,
+		"PreliminaryKey" : 0
+	}
+	},
+	"SwitchGrenades" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 103,
+		"PreliminaryKey" : 0
+	}
+	},
+	"HoldBreath" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 308,
+		"PreliminaryKey" : 0
+	}
+	},
+	"FlashlightsCycle" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 326,
+		"PreliminaryKey" : 0
+	}
+	},
+	"SwitchBetweenSights" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 301,
+		"PreliminaryKey" : 0
+	}
+	},
+	"SwitchSecondPrimary" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 51,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ToggleNVGs" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 0,
+		"PrimaryKey" : 110,
+		"PreliminaryKey" : 0
+	}
+	},
+	"WalkForward" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 119,
+		"PreliminaryKey" : 0
+	}
+	},
+	"ScopeZeroDown" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 2,
+		"PrimaryKey" : 281,
+		"PreliminaryKey" : 0
+	}
+	},
+	"Vault" : {
+		"__type" : "InputLayer+InputKeyBind,Assembly-CSharp",
+		"value" : {
+		"PressType" : 4,
+		"PrimaryKey" : 32,
+		"PreliminaryKey" : 0
+	}
+	}
+}

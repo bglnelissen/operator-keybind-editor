@@ -1,0 +1,11 @@
+# Personal keybind files — never commit your own bindings
+KeyBinds.es3
+KeyBinds_*.es3
+!KeyBinds.default.es3
+
+# OS / editor cruft
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/

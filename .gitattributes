@@ -1,0 +1,2 @@
+# Keep save files byte-identical — no line-ending normalization
+*.es3 -text
