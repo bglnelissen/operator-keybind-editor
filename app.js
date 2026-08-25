@@ -168,10 +168,10 @@ const PRESET_DEFAULT = {
 const PRESET_NUMPAD = {
   Console: [96, 0, 0], ATAKZoomIn: [39, 0, 2], ATAKZoomMoveRight: [275, 0, 2],
   ATAKZoomMoveLeft: [276, 0, 2], WalkLeft: [260, 0, 2], Kick: [258, 0, 1],
-  Reload: [325, 0, 2], OpenATAK: [109, 0, 2], RadioChat: [107, 0, 2],
+  Reload: [325, 0, 2], OpenATAK: [109, 0, 2], RadioChat: [281, 0, 2],
   VoiceTaunt: [282, 0, 0], SwitchPrimary: [257, 0, 0], FreeLean: [258, 0, 2],
-  CheckMag: [276, 0, 4], ScopeZeroUp: [280, 0, 2], ATAKZoomOut: [59, 0, 2],
-  FlashlightsToggle: [278, 0, 1], CantWeapon: [267, 0, 0], Voicechat: [104, 0, 2],
+  CheckMag: [276, 0, 4], ScopeZeroUp: [280, 303, 0], ATAKZoomOut: [59, 0, 2],
+  FlashlightsToggle: [278, 0, 1], CantWeapon: [267, 0, 0], Voicechat: [280, 0, 2],
   ATAKDropBomb: [305, 0, 0], SwitchSecondary: [259, 0, 0], CheckChamber: [326, 0, 4],
   ATAKZoomMoveDown: [274, 0, 2], Aim: [324, 0, 0], LeanLeft: [263, 0, 0],
   NVGGainIncrease: [127, 0, 0], Prone: [46, 0, 3], EmergencyReload: [325, 0, 3],
@@ -185,7 +185,7 @@ const PRESET_NUMPAD = {
   Crouch: [46, 0, 2], LasersToggle: [327, 0, 1], SwitchGrenades: [268, 0, 0],
   HoldBreath: [275, 0, 2], FlashlightsCycle: [278, 0, 2], SwitchBetweenSights: [274, 0, 0],
   SwitchSecondPrimary: [257, 0, 3], ToggleNVGs: [279, 0, 0], WalkForward: [264, 0, 2],
-  ScopeZeroDown: [281, 0, 2], Vault: [258, 0, 4]
+  ScopeZeroDown: [281, 303, 0], Vault: [258, 0, 4]
 };
 
 // ---- Day / night theme --------------------------------------------------
