@@ -13,11 +13,13 @@ Everything runs client-side. No file is ever uploaded to a server.
   automatically, so the page is never empty on arrival.
 - **Click-to-rebind** — click a key badge, press any key or mouse button. Modifier combos
   (e.g. `Shift` + `T`) are supported.
-- **Activation types** — Press, Release, Hold, Double Click and Hold Delayed are editable per action.
 - **Presets** — Default and Numpad are built in and read-only. Numpad is a played-in layout that
   drives movement from the number pad and keeps the mouse hand free. Save your own under any name and
   it becomes *live*: every rebind and activation-type change is written back to it immediately,
   no save step.
+- **Activation types** — Press, Toggle, Release, Hold, Double Click and Hold Delayed are editable
+  per action, and an info dialog explains what each one does, including why Hold Delayed is what
+  makes two actions share a single key.
 - **Keyboard map on hover** — hovering a binding highlights the physical key on a schematic
   full-size keyboard (main block, navigation cluster, arrows, numpad).
 - **Recent uploads** — previously loaded files stay available so you can switch back.
@@ -78,5 +80,9 @@ Each entry maps an action name to a serialized C# object:
 
 ## Disclaimer
 
-Unofficial community tool, not affiliated with VECTOR INTERACTIVE.
+Set up by B. Nelissen ([github.com/bglnelissen](https://github.com/bglnelissen)), built under the
+supervision of Claude.
+
+Unofficial fan tool. Not affiliated with, endorsed by, or connected to VECTOR INTERACTIVE.
+The game itself is on [Steam](https://store.steampowered.com/app/1913370/OPERATOR/).
 Editing save files is at your own risk — keep a backup.

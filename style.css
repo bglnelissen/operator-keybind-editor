@@ -211,6 +211,7 @@ input[type=file]{display:none;}
   color:var(--text-dim);
 }
 .pathbar-label{letter-spacing:0.5px;}
+.pathbar-label b{color:var(--accent);font-weight:600;}
 .pathbar .pathtext{
   background:var(--panel2);
   border:1px solid var(--line);
@@ -542,7 +543,70 @@ footer{
   font-size:10.5px;
   color:var(--text-dim);
   letter-spacing:1px;
+  line-height:1.8;
 }
+footer p{margin:0;}
+footer b{color:var(--text);font-weight:600;}
+footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;}
+footer a:hover{border-bottom-color:var(--accent);}
+footer .disclaimer{
+  margin-top:10px;
+  font-size:9.5px;
+  opacity:0.75;
+  max-width:520px;
+  margin-left:auto;margin-right:auto;
+  line-height:1.7;
+}
+
+/* Activation types explainer. Wider and left-aligned, unlike the capture overlay. */
+.infobox{
+  text-align:left;
+  max-width:620px;
+  width:calc(100% - 32px);
+  max-height:calc(100vh - 64px);
+  overflow-y:auto;
+  padding:26px 30px 24px;
+  border-color:var(--line);
+}
+.infobox .title{margin-bottom:14px;}
+.infolead{
+  margin:0 0 16px;
+  font-size:12px;
+  line-height:1.7;
+  color:var(--text);
+}
+.infolist{margin:0;}
+.infolist dt{
+  color:var(--accent);
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-top:12px;
+}
+.infolist dt:first-child{margin-top:0;}
+.infolist dd{
+  margin:3px 0 0;
+  font-size:12px;
+  line-height:1.65;
+  color:var(--text-dim);
+}
+.infonote,.infosource{
+  font-size:11.5px;
+  line-height:1.65;
+  color:var(--text-dim);
+  border-top:1px solid var(--line);
+  padding-top:12px;
+  margin:18px 0 0;
+}
+.infosource{
+  border-top:none;
+  padding-top:0;
+  margin-top:10px;
+  font-size:10.5px;
+  opacity:0.7;
+}
+.infobox b{color:var(--text);}
+.infobox i{color:var(--accent);font-style:normal;}
 
 .print-header{display:none;}
 

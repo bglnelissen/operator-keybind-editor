@@ -232,6 +232,19 @@ document.getElementById('revertBtn').addEventListener('click', () => {
   renderTables();
   setStatus('Reverted to the uploaded file.', 'warn');
 });
+// ---- Activation types explainer ----------------------------------------
+const infoOverlay = document.getElementById('infoOverlay');
+function openInfo() { infoOverlay.classList.add('show'); }
+function closeInfo() { infoOverlay.classList.remove('show'); }
+
+document.getElementById('helpTypesBtn').addEventListener('click', openInfo);
+document.getElementById('infoClose').addEventListener('click', closeInfo);
+// Clicking the backdrop closes it; clicking inside the box must not.
+infoOverlay.addEventListener('click', e => { if (!e.target.closest('.overlay-box')) closeInfo(); });
+window.addEventListener('keydown', e => {
+  if (e.code === 'Escape' && infoOverlay.classList.contains('show')) closeInfo();
+});
+
 document.getElementById('printBtn').addEventListener('click', () => {
   // A printed sheet without a name is unidentifiable a week later, so insist on one.
   const preset = currentPresetName() || askForPresetName('Name this preset before printing:');
