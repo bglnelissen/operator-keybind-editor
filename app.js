@@ -349,14 +349,17 @@ document.getElementById('sourceCopy').addEventListener('click', function () {
   else done();
 });
 
+function setPrintHeader(preset) {
+  document.getElementById('printPreset').textContent = ' · ' + preset;
+  document.getElementById('printMeta').textContent = 'Preset: ' + preset + ' · ' + originalFilename + ' · '
+    + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
 document.getElementById('printBtn').addEventListener('click', () => {
   // A printed sheet without a name is unidentifiable a week later, so insist on one.
   const preset = currentPresetName() || askForPresetName('Name this preset before printing:');
   if (!preset) { setStatus('Print cancelled — a preset name is needed on the printout.', 'warn'); return; }
-  document.getElementById('printPreset').textContent = ' · ' + preset;
-  const meta = document.getElementById('printMeta');
-  meta.textContent = 'Preset: ' + preset + ' · ' + originalFilename + ' · '
-    + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  setPrintHeader(preset);
   window.print();
 });
 document.getElementById('downloadBackupBtn').addEventListener('click', () => {
@@ -963,8 +966,21 @@ function loadDefaults(opts) {
 
 document.getElementById('loadDefaultsBtn').addEventListener('click', () => loadDefaults());
 
+// ?preset=default|numpad opens the page straight on a built-in preset, with the print
+// header already filled in. That is what the bundled PDF sheets are rendered from.
+function presetFromUrl() {
+  const asked = new URLSearchParams(location.search).get('preset');
+  return { 'default': '__default', 'numpad': '__numpad' }[asked] || null;
+}
+
 // Load the factory bindings automatically so the site is never empty on arrival.
-loadDefaults({ silent: true });
+loadDefaults({ silent: true }).then(() => {
+  const wanted = presetFromUrl();
+  if (!wanted) return;
+  presetSelect.value = wanted;
+  presetSelect.dispatchEvent(new Event('change'));
+  setPrintHeader(BUILTIN_PRESET_NAMES[wanted]);
+});
 
 // ---- Keyboard hover diagram --------------------------------------------
 // Parked for now. Flip to true to bring the schematic keyboard back; the panel,

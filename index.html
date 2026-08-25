@@ -54,6 +54,11 @@
         or click <b>Load defaults</b> below to open them straight in the editor.
       </p>
       <button class="btn btn-ghost" id="loadDefaultsBtn">Load defaults</button>
+      <p class="sheetnote">
+        Just want the layout to read on a tablet or on paper? Printable sheets, one A4 each:
+        <a href="sheets/keybinds-default.pdf" target="_blank" rel="noopener noreferrer">Default (PDF)</a> ·
+        <a href="sheets/keybinds-numpad.pdf" target="_blank" rel="noopener noreferrer">Numpad (PDF)</a>
+      </p>
     </div>
     <div id="recentUploads" style="display:none;"></div>
   </div>
@@ -62,7 +67,9 @@
     <div class="toolbar">
       <span class="filename" id="filenameLabel"></span>
       <label class="presetlabel">Preset:
-        <select id="presetSelect">
+        <!-- autocomplete=off: without it the browser restores the previous selection
+             after load, overriding both the loaded file and any ?preset= in the URL. -->
+        <select id="presetSelect" autocomplete="off">
           <option value="">— choose —</option>
           <option value="__default">Default</option>
           <option value="__numpad">Numpad</option>
@@ -101,7 +108,7 @@
   <div class="grid" id="sectionsGrid"></div>
 
   <footer>
-    <p>Set up by <b>B. Nelissen</b>, built under the supervision of Claude ·
+    <p>Built by Claude under the supervision of <b>B. Nelissen</b> ·
       <a href="https://github.com/bglnelissen" target="_blank" rel="noopener noreferrer">github.com/bglnelissen</a></p>
     <p>Client-side tool · no data leaves your browser ·
       <button class="linkbtn" id="themeToggle" type="button"></button></p>

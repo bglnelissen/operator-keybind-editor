@@ -24,6 +24,9 @@ Everything runs client-side. No file is ever uploaded to a server.
   copy button. What you see is byte-for-byte what *Download edited version* writes.
 - **Day / night theme** - a text link in the footer. Follows the OS preference on a first visit,
   then remembers the choice. Every colour is a CSS token, so a third theme is a palette block.
+- **Printable sheets** - `sheets/keybinds-default.pdf` and `sheets/keybinds-numpad.pdf`, one A4
+  each, linked from the upload panel. Regenerate them with `./make-sheets.sh` after changing a
+  built-in preset, or they drift out of sync.
 - **Recent uploads** — previously loaded files stay available so you can switch back.
 - **Print / PDF export** — all bindings on a single A4 sheet, headed with the preset name.
   A config that has no name yet is named first, which also stores it as a preset.
@@ -88,8 +91,8 @@ Each entry maps an action name to a serialized C# object:
 
 ## Disclaimer
 
-Set up by B. Nelissen ([github.com/bglnelissen](https://github.com/bglnelissen)), built under the
-supervision of Claude.
+Built by Claude under the supervision of B. Nelissen
+([github.com/bglnelissen](https://github.com/bglnelissen)).
 
 Unofficial fan tool. Not affiliated with, endorsed by, or connected to VECTOR INTERACTIVE.
 The game itself is on [Steam](https://store.steampowered.com/app/1913370/OPERATOR/).
