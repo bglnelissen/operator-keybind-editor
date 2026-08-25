@@ -214,10 +214,11 @@ dropzone.addEventListener('drop', e => {
 fileInput.addEventListener('change', () => { if (fileInput.files.length) handleFile(fileInput.files[0]); });
 
 document.getElementById('loadOtherBtn').addEventListener('click', () => {
+  // Keep the current file on screen while a new one is picked: its buttons stay usable,
+  // and cancelling the file dialog no longer leaves an empty page behind.
   uploadPanel.style.display = '';
-  editorPanel.style.display = 'none';
-  sectionsGrid.innerHTML = '';
   fileInput.value = '';
+  uploadPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 document.getElementById('resetBtn').addEventListener('click', () => {
   applyDefaultBindings();
@@ -282,7 +283,12 @@ function renderSource() {
   sourceCode.parentElement.scrollTop = 0;
 }
 
-function openSource() { renderSource(); sourceOverlay.classList.add('show'); }
+function openSource() {
+  // Only reachable with a file loaded, but never throw if one somehow is not.
+  if (!data) { setStatus('No file loaded yet — nothing to show as code.', 'warn'); return; }
+  renderSource();
+  sourceOverlay.classList.add('show');
+}
 function closeSource() { sourceOverlay.classList.remove('show'); }
 
 document.getElementById('viewSourceBtn').addEventListener('click', openSource);
