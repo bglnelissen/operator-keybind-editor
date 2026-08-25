@@ -346,6 +346,13 @@ input[type=file]{display:none;}
 .status.ok{color:var(--green);}
 .status.warn{color:var(--accent);}
 
+/* Reference material, not an action — parked in the corner, out of the button flow. */
+.panelfoot{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:12px;
+}
+
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
