@@ -631,8 +631,9 @@ tbody tr.has-conflict{background:var(--row-conflict);}
 }
 .mobilenote b{color:var(--accent);letter-spacing:1px;}
 
-/* Touch phones/tablets: no Esc key, and taps must not register as mouse clicks. */
-@media (pointer:coarse) and (max-width:900px){
+/* Any touch device: no Esc key, so the overlay must advertise the X instead.
+   Width is deliberately not part of this -- a tablet in landscape has no Esc either. */
+@media (pointer:coarse){
   .mobilenote{display:block;}
   .hint-key{display:none;}
   .hint-touch{display:block;}

@@ -138,23 +138,30 @@ const ACTION_META = {
 };
 const SECTION_ORDER = ['Movement', 'Tactical Movement', 'Player', 'Comms', 'Inventory', 'Weapons & Optics', 'ATAK (Drone / Tablet)', 'Misc'];
 
-// ---- Ingebouwde presets (PrimaryKey/PreliminaryKey per actie) -----------
+// ---- Built-in presets: [PrimaryKey, PreliminaryKey, PressType] per action ----
+// Fallback for the file:// case, where the bundled default file cannot be fetched.
+// Carries PressType so switching back to Default really does undo a preset.
 const PRESET_DEFAULT = {
-  Console: [96, 0], ATAKZoomIn: [39, 0], ATAKZoomMoveRight: [275, 0], ATAKZoomMoveLeft: [276, 0],
-  WalkLeft: [97, 0], Kick: [32, 0], Reload: [114, 0], OpenATAK: [109, 0], RadioChat: [107, 0],
-  VoiceTaunt: [282, 0], SwitchPrimary: [50, 0], FreeLean: [306, 0], CheckMag: [114, 0],
-  ScopeZeroUp: [280, 0], ATAKZoomOut: [59, 0], FlashlightsToggle: [326, 0], CantWeapon: [116, 0],
-  Voicechat: [104, 0], ATAKDropBomb: [305, 0], SwitchSecondary: [49, 0], CheckChamber: [116, 306],
-  ATAKZoomMoveDown: [274, 0], Aim: [324, 0], LeanLeft: [113, 0], NVGGainIncrease: [280, 0],
-  Prone: [122, 0], EmergencyReload: [114, 0], WalkRight: [100, 0], LasersCycle: [327, 0],
-  HealthMenu: [9, 0], Inspect: [105, 0], Run: [304, 0], ATAKZoomMoveUp: [273, 0],
-  DropWeapon: [121, 0], Firemode: [98, 0], ChamberRound: [116, 304], WalkBackward: [115, 0],
-  Freelook: [325, 0], ReticleBrightnessDecrease: [274, 0], ZoomOptics: [308, 0], LeanRight: [101, 0],
-  Sprint: [304, 0], Interact: [102, 0], Shoot: [323, 0], SwitchSpecialPurpose: [52, 0],
-  NVGGainDecrease: [281, 0], ATAKZoomCycleFLIR: [46, 0], ReticleBrightnessIncrease: [273, 0],
-  Crouch: [99, 0], LasersToggle: [327, 0], SwitchGrenades: [103, 0], HoldBreath: [308, 0],
-  FlashlightsCycle: [326, 0], SwitchBetweenSights: [301, 0], SwitchSecondPrimary: [51, 0],
-  ToggleNVGs: [110, 0], WalkForward: [119, 0], ScopeZeroDown: [281, 0], Vault: [32, 0]
+  Console: [96, 0, 0], ATAKZoomIn: [39, 0, 2], ATAKZoomMoveRight: [275, 0, 2],
+  ATAKZoomMoveLeft: [276, 0, 2], WalkLeft: [97, 0, 2], Kick: [32, 0, 1],
+  Reload: [114, 0, 1], OpenATAK: [109, 0, 2], RadioChat: [107, 0, 2],
+  VoiceTaunt: [282, 0, 0], SwitchPrimary: [50, 0, 0], FreeLean: [306, 0, 2],
+  CheckMag: [114, 0, 4], ScopeZeroUp: [280, 0, 2], ATAKZoomOut: [59, 0, 2],
+  FlashlightsToggle: [326, 0, 1], CantWeapon: [116, 0, 0], Voicechat: [104, 0, 2],
+  ATAKDropBomb: [305, 0, 0], SwitchSecondary: [49, 0, 0], CheckChamber: [116, 306, 0],
+  ATAKZoomMoveDown: [274, 0, 2], Aim: [324, 0, 0], LeanLeft: [113, 0, 0],
+  NVGGainIncrease: [280, 0, 0], Prone: [122, 0, 0], EmergencyReload: [114, 0, 6],
+  WalkRight: [100, 0, 2], LasersCycle: [327, 0, 2], HealthMenu: [9, 0, 2],
+  Inspect: [105, 0, 0], Run: [304, 0, 4], ATAKZoomMoveUp: [273, 0, 2],
+  DropWeapon: [121, 0, 0], Firemode: [98, 0, 0], ChamberRound: [116, 304, 0],
+  WalkBackward: [115, 0, 2], Freelook: [325, 0, 2], ReticleBrightnessDecrease: [274, 0, 0],
+  ZoomOptics: [308, 0, 2], LeanRight: [101, 0, 0], Sprint: [304, 0, 3],
+  Interact: [102, 0, 0], Shoot: [323, 0, 2], SwitchSpecialPurpose: [52, 0, 0],
+  NVGGainDecrease: [281, 0, 0], ATAKZoomCycleFLIR: [46, 0, 0], ReticleBrightnessIncrease: [273, 0, 0],
+  Crouch: [99, 0, 0], LasersToggle: [327, 0, 1], SwitchGrenades: [103, 0, 0],
+  HoldBreath: [308, 0, 2], FlashlightsCycle: [326, 0, 2], SwitchBetweenSights: [301, 0, 0],
+  SwitchSecondPrimary: [51, 0, 0], ToggleNVGs: [110, 0, 0], WalkForward: [119, 0, 2],
+  ScopeZeroDown: [281, 0, 2], Vault: [32, 0, 4]
 };
 
 // Taken from a played-in numpad layout, so this one also carries its activation types.
@@ -259,6 +266,16 @@ document.getElementById('revertBtn').addEventListener('click', () => {
   renderTables();
   setStatus('Reverted to the uploaded file.', 'warn');
 });
+// Dismiss a dialog only when the press *and* the release land on the backdrop.
+// Dragging a text selection out of the box would otherwise close it mid-select.
+function closeOnBackdropClick(overlay, close) {
+  let pressedBackdrop = false;
+  overlay.addEventListener('pointerdown', e => { pressedBackdrop = !e.target.closest('.overlay-box'); });
+  overlay.addEventListener('click', e => {
+    if (pressedBackdrop && !e.target.closest('.overlay-box')) close();
+  });
+}
+
 // ---- Activation types explainer ----------------------------------------
 const infoOverlay = document.getElementById('infoOverlay');
 function openInfo() { infoOverlay.classList.add('show'); }
@@ -267,7 +284,7 @@ function closeInfo() { infoOverlay.classList.remove('show'); }
 document.getElementById('helpTypesBtn').addEventListener('click', openInfo);
 document.getElementById('infoClose').addEventListener('click', closeInfo);
 // Clicking the backdrop closes it; clicking inside the box must not.
-infoOverlay.addEventListener('click', e => { if (!e.target.closest('.overlay-box')) closeInfo(); });
+closeOnBackdropClick(infoOverlay, closeInfo);
 window.addEventListener('keydown', e => {
   if (e.code !== 'Escape') return;
   if (infoOverlay.classList.contains('show')) closeInfo();
@@ -319,7 +336,7 @@ function closeSource() { sourceOverlay.classList.remove('show'); }
 
 document.getElementById('viewSourceBtn').addEventListener('click', openSource);
 document.getElementById('sourceClose').addEventListener('click', closeSource);
-sourceOverlay.addEventListener('click', e => { if (!e.target.closest('.overlay-box')) closeSource(); });
+closeOnBackdropClick(sourceOverlay, closeSource);
 sourceTabEdited.addEventListener('click', () => { sourceView = 'edited'; renderSource(); });
 sourceTabOriginal.addEventListener('click', () => { sourceView = 'original'; renderSource(); });
 
@@ -420,9 +437,13 @@ function describeBinding(val, actionKey) {
 
 // The tablet is its own input context: those binds are only live while ATAK is open, so
 // they can reuse keys from the rest of the game without ever firing at the same time.
+// Opening it is the exception — that key is pressed while playing, so it belongs to the game.
 const CONFLICT_SCOPES = { 'ATAK (Drone / Tablet)': 'atak' };
+const CONFLICT_SCOPE_OVERRIDES = { OpenATAK: 'game' };
 function conflictScope(actionKey) {
-  return CONFLICT_SCOPES[ACTION_META[actionKey][0]] || 'game';
+  return CONFLICT_SCOPE_OVERRIDES[actionKey]
+    || CONFLICT_SCOPES[ACTION_META[actionKey][0]]
+    || 'game';
 }
 
 function findConflicts() {
@@ -729,12 +750,16 @@ function applyPresetMap(map) {
   renderTables();
 }
 
-// The whole editable config, in the shape presets are stored in.
-function captureCurrentMap() {
-  const map = {};
+// The whole editable config, in the shape presets are stored in. `previous` carries
+// over actions the loaded file does not contain, so autosaving from a partial file
+// cannot quietly shrink a preset that already covered them.
+function captureCurrentMap(previous) {
+  const map = Object.assign({}, previous);
   Object.keys(data).forEach(actionKey => {
     if (actionKey === 'None' || !ACTION_META[actionKey]) return;
-    const val = data[actionKey].value;
+    const entry = data[actionKey];
+    if (!entry || !entry.value) return;
+    const val = entry.value;
     map[actionKey] = [val.PrimaryKey, val.PreliminaryKey, val.PressType];
   });
   return map;
@@ -742,7 +767,7 @@ function captureCurrentMap() {
 
 function storePreset(name) {
   const custom = loadCustomPresets();
-  custom[name] = captureCurrentMap();
+  custom[name] = captureCurrentMap(custom[name]);
   saveCustomPresets(custom);
   refreshPresetOptions();
   presetSelect.value = 'custom:' + name;
@@ -753,7 +778,7 @@ function storePreset(name) {
 function autosaveActivePreset() {
   if (!activePreset) return false;
   const custom = loadCustomPresets();
-  custom[activePreset] = captureCurrentMap();
+  custom[activePreset] = captureCurrentMap(custom[activePreset]);
   saveCustomPresets(custom);
   return true;
 }
