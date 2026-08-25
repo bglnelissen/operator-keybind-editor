@@ -103,28 +103,11 @@ body{
 }
 .wrap{max-width:1280px;margin:0 auto;}
 header{
-  position:relative;
   text-align:center;
   margin-bottom:10px;
   padding-bottom:24px;
   border-bottom:1px solid var(--line);
 }
-.themetoggle{
-  position:absolute;
-  top:0;right:0;
-  background:var(--panel2);
-  color:var(--text-dim);
-  border:1px solid var(--line);
-  border-radius:3px;
-  padding:6px 12px;
-  font-family:inherit;
-  font-size:11px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:border-color .15s, color .15s;
-}
-.themetoggle:hover{border-color:var(--accent);color:var(--accent);}
 /* ---- CRT title -------------------------------------------------------- */
 .title-crt{
   position:relative;
@@ -651,6 +634,18 @@ footer p{margin:0;}
 footer b{color:var(--text);font-weight:600;}
 footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;}
 footer a:hover{border-bottom-color:var(--accent);}
+.linkbtn{
+  background:none;
+  border:none;
+  border-bottom:1px solid transparent;
+  padding:0;
+  font-family:inherit;
+  font-size:inherit;
+  letter-spacing:inherit;
+  color:var(--accent);
+  cursor:pointer;
+}
+.linkbtn:hover{border-bottom-color:var(--accent);}
 footer .disclaimer{
   margin-top:10px;
   font-size:9.5px;
@@ -791,7 +786,6 @@ footer .disclaimer{
   #uploadPanel,
   #editorPanel,
   .overlay,
-  .themetoggle,
   .mobilenote,
   .kbdpanel,
   footer,

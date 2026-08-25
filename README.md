@@ -22,7 +22,7 @@ Everything runs client-side. No file is ever uploaded to a server.
   makes two actions share a single key.
 - **Show KeyBinds.es3 code** — the raw JSON in a dialog, either as edited or as uploaded, with a
   copy button. What you see is byte-for-byte what *Download edited version* writes.
-- **Day / night theme** - toggle in the top right. Follows the OS preference on a first visit,
+- **Day / night theme** - a text link in the footer. Follows the OS preference on a first visit,
   then remembers the choice. Every colour is a CSS token, so a third theme is a palette block.
 - **Recent uploads** — previously loaded files stay available so you can switch back.
 - **Print / PDF export** — all bindings on a single A4 sheet, headed with the preset name.

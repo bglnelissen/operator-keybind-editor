@@ -200,10 +200,8 @@ function currentTheme() {
 
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
-  const toDay = theme === 'dark';
-  themeToggle.textContent = toDay ? '☀ Day' : '☾ Night';
-  themeToggle.title = toDay ? 'Switch to the day theme' : 'Switch to the night theme';
-  themeToggle.setAttribute('aria-label', themeToggle.title);
+  // The label names where the click goes, not where you are.
+  themeToggle.textContent = theme === 'dark' ? 'switch to day theme' : 'switch to night theme';
 }
 
 themeToggle.addEventListener('click', () => {
