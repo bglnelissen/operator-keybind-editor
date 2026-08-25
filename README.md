@@ -20,8 +20,8 @@ Everything runs client-side. No file is ever uploaded to a server.
 - **Activation types** — Press, Toggle, Release, Hold, Double Click and Hold Delayed are editable
   per action, and an info dialog explains what each one does, including why Hold Delayed is what
   makes two actions share a single key.
-- **Keyboard map on hover** — hovering a binding highlights the physical key on a schematic
-  full-size keyboard (main block, navigation cluster, arrows, numpad).
+- **View file as code** — the raw `.es3` JSON in a dialog, either as edited or as uploaded, with a
+  copy button. What you see is byte-for-byte what *Download edited version* writes.
 - **Recent uploads** — previously loaded files stay available so you can switch back.
 - **Print / PDF export** — all bindings on a single A4 sheet, headed with the preset name.
   A config that has no name yet is named first, which also stores it as a preset.
@@ -37,6 +37,12 @@ The file is `KeyBinds.es3`. It is plain JSON written by
 
 **Back up your original before overwriting it.** The tool has a *Download backup (original)*
 button for exactly this.
+
+## Parked features
+
+The schematic keyboard that lit up under a hovered binding is switched off, not removed:
+`keyboard.js`, the panel markup and the styling are all still there. Set
+`KEYBOARD_HOVER_ENABLED = true` in `app.js` to bring it back.
 
 ## Running it
 

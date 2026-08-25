@@ -242,7 +242,64 @@ document.getElementById('infoClose').addEventListener('click', closeInfo);
 // Clicking the backdrop closes it; clicking inside the box must not.
 infoOverlay.addEventListener('click', e => { if (!e.target.closest('.overlay-box')) closeInfo(); });
 window.addEventListener('keydown', e => {
-  if (e.code === 'Escape' && infoOverlay.classList.contains('show')) closeInfo();
+  if (e.code !== 'Escape') return;
+  if (infoOverlay.classList.contains('show')) closeInfo();
+  if (sourceOverlay.classList.contains('show')) closeSource();
+});
+
+// ---- Raw .es3 viewer ----------------------------------------------------
+const sourceOverlay = document.getElementById('sourceOverlay');
+const sourceCode = document.getElementById('sourceCode');
+const sourceMeta = document.getElementById('sourceMeta');
+const sourceTabEdited = document.getElementById('sourceTabEdited');
+const sourceTabOriginal = document.getElementById('sourceTabOriginal');
+let sourceView = 'edited';
+
+// Minimal JSON colouring. Escapes first, then wraps tokens, so the file's own
+// text can never inject markup.
+function highlightJson(text) {
+  const escaped = text.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  return escaped.replace(/("(?:\\.|[^"\\])*")(\s*:)?|(-?\d+(?:\.\d+)?)/g,
+    (m, str, colon, num) => {
+      if (num !== undefined) return '<span class="s-num">' + num + '</span>';
+      if (colon) return '<span class="s-key">' + str + '</span>' + colon;
+      return '<span class="s-str">' + str + '</span>';
+    });
+}
+
+function currentSourceText() {
+  return sourceView === 'original' ? originalText : JSON.stringify(data, null, '\t');
+}
+
+function renderSource() {
+  const text = currentSourceText();
+  sourceCode.innerHTML = highlightJson(text);
+  sourceTabEdited.classList.toggle('is-active', sourceView === 'edited');
+  sourceTabOriginal.classList.toggle('is-active', sourceView === 'original');
+  const lines = text.split('\n').length;
+  sourceMeta.textContent = originalFilename + ' · ' + lines + ' lines · '
+    + (new Blob([text]).size / 1024).toFixed(1) + ' kB';
+  sourceCode.parentElement.scrollTop = 0;
+}
+
+function openSource() { renderSource(); sourceOverlay.classList.add('show'); }
+function closeSource() { sourceOverlay.classList.remove('show'); }
+
+document.getElementById('viewSourceBtn').addEventListener('click', openSource);
+document.getElementById('sourceClose').addEventListener('click', closeSource);
+sourceOverlay.addEventListener('click', e => { if (!e.target.closest('.overlay-box')) closeSource(); });
+sourceTabEdited.addEventListener('click', () => { sourceView = 'edited'; renderSource(); });
+sourceTabOriginal.addEventListener('click', () => { sourceView = 'original'; renderSource(); });
+
+document.getElementById('sourceCopy').addEventListener('click', function () {
+  const btn = this;
+  const done = () => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  };
+  if (navigator.clipboard) navigator.clipboard.writeText(currentSourceText()).then(done, done);
+  else done();
 });
 
 document.getElementById('printBtn').addEventListener('click', () => {
@@ -855,6 +912,11 @@ document.getElementById('loadDefaultsBtn').addEventListener('click', () => loadD
 loadDefaults({ silent: true });
 
 // ---- Keyboard hover diagram --------------------------------------------
+// Parked for now. Flip to true to bring the schematic keyboard back; the panel,
+// its markup and keyboard.js are all still in place.
+const KEYBOARD_HOVER_ENABLED = false;
+
+if (KEYBOARD_HOVER_ENABLED) {
 buildKeyboardGrid();
 sectionsGrid.addEventListener('mouseover', e => {
   const el = e.target.closest('.key');
@@ -870,3 +932,4 @@ sectionsGrid.addEventListener('mouseout', e => {
   if (el.contains(e.relatedTarget)) return;
   hideKeyboardPanel();
 });
+}
