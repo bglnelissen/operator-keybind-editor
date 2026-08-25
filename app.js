@@ -316,13 +316,20 @@ function describeBinding(val, actionKey) {
   return combo + ' · ' + pressTypeLabel(actionKey, val.PressType);
 }
 
+// The tablet is its own input context: those binds are only live while ATAK is open, so
+// they can reuse keys from the rest of the game without ever firing at the same time.
+const CONFLICT_SCOPES = { 'ATAK (Drone / Tablet)': 'atak' };
+function conflictScope(actionKey) {
+  return CONFLICT_SCOPES[ACTION_META[actionKey][0]] || 'game';
+}
+
 function findConflicts() {
   const bySignature = new Map();
   Object.keys(ACTION_META).forEach(actionKey => {
     const entry = data[actionKey];
     if (!entry || !entry.value) return;
     if (!entry.value.PrimaryKey) return;   // unassigned is never a clash
-    const sig = entry.value.PrimaryKey + '|' + entry.value.PreliminaryKey + '|' + entry.value.PressType;
+    const sig = conflictScope(actionKey) + '|' + entry.value.PrimaryKey + '|' + entry.value.PreliminaryKey + '|' + entry.value.PressType;
     if (!bySignature.has(sig)) bySignature.set(sig, []);
     bySignature.get(sig).push(actionKey);
   });
