@@ -20,7 +20,7 @@ Everything runs client-side. No file is ever uploaded to a server.
 - **Activation types** — Press, Toggle, Release, Hold, Double Click and Hold Delayed are editable
   per action, and an info dialog explains what each one does, including why Hold Delayed is what
   makes two actions share a single key.
-- **View file as code** — the raw `.es3` JSON in a dialog, either as edited or as uploaded, with a
+- **Show raw .es3 code** — the raw `.es3` JSON in a dialog, either as edited or as uploaded, with a
   copy button. What you see is byte-for-byte what *Download edited version* writes.
 - **Recent uploads** — previously loaded files stay available so you can switch back.
 - **Print / PDF export** — all bindings on a single A4 sheet, headed with the preset name.

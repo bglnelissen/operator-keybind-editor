@@ -68,9 +68,9 @@
       <button class="btn btn-ghost" id="revertBtn">Revert to uploaded</button>
       <button class="btn" id="loadOtherBtn">Load another file</button>
       <button class="btn btn-ghost" id="helpTypesBtn" title="What do Press, Hold, Double Click and Hold Delayed do?">ⓘ Activation types</button>
-      <button class="btn btn-ghost" id="viewSourceBtn" title="Show the raw .es3 JSON as it stands now">‹› View file as code</button>
       <button class="btn" id="printBtn">Export to PDF / print</button>
       <button class="btn" id="downloadBackupBtn">Download backup (original)</button>
+      <button class="btn btn-ghost" id="viewSourceBtn" title="Show the raw .es3 JSON exactly as it would be downloaded">‹› Show raw .es3 code</button>
       <button class="btn btn-primary" id="downloadEditedBtn">Download edited version</button>
     </div>
     <div class="pathbar js-pathrow">
@@ -149,7 +149,7 @@
 <div class="overlay" id="sourceOverlay">
   <div class="overlay-box sourcebox" role="dialog" aria-modal="true" aria-labelledby="sourceTitle">
     <button class="overlay-close" id="sourceClose" type="button" aria-label="Close">✕</button>
-    <div class="title" id="sourceTitle">File as code</div>
+    <div class="title" id="sourceTitle">Raw .es3 code</div>
     <div class="sourcebar">
       <span class="sourcetabs">
         <button class="sourcetab is-active" id="sourceTabEdited" type="button">Edited</button>
