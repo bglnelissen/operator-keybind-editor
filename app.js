@@ -166,26 +166,26 @@ const PRESET_DEFAULT = {
 
 // Taken from a played-in numpad layout, so this one also carries its activation types.
 const PRESET_NUMPAD = {
-  Console: [96, 0, 0], ATAKZoomIn: [39, 0, 2], ATAKZoomMoveRight: [100, 0, 2],
-  ATAKZoomMoveLeft: [97, 0, 2], WalkLeft: [260, 0, 2], Kick: [258, 0, 1],
-  Reload: [325, 0, 0], OpenATAK: [109, 0, 2], RadioChat: [107, 0, 2],
-  VoiceTaunt: [282, 0, 0], SwitchPrimary: [257, 0, 0], FreeLean: [258, 0, 0],
-  CheckMag: [275, 0, 3], ScopeZeroUp: [273, 0, 2], ATAKZoomOut: [59, 0, 2],
-  FlashlightsToggle: [278, 0, 1], CantWeapon: [267, 0, 1], Voicechat: [104, 0, 2],
-  ATAKDropBomb: [305, 0, 0], SwitchSecondary: [259, 0, 0], CheckChamber: [326, 0, 3],
-  ATAKZoomMoveDown: [115, 0, 2], Aim: [324, 0, 0], LeanLeft: [263, 0, 0],
+  Console: [96, 0, 0], ATAKZoomIn: [39, 0, 2], ATAKZoomMoveRight: [275, 0, 2],
+  ATAKZoomMoveLeft: [276, 0, 2], WalkLeft: [260, 0, 2], Kick: [258, 0, 1],
+  Reload: [325, 0, 2], OpenATAK: [109, 0, 2], RadioChat: [107, 0, 2],
+  VoiceTaunt: [282, 0, 0], SwitchPrimary: [257, 0, 0], FreeLean: [258, 0, 2],
+  CheckMag: [273, 0, 0], ScopeZeroUp: [280, 0, 2], ATAKZoomOut: [59, 0, 2],
+  FlashlightsToggle: [278, 0, 1], CantWeapon: [267, 0, 0], Voicechat: [104, 0, 2],
+  ATAKDropBomb: [305, 0, 0], SwitchSecondary: [259, 0, 0], CheckChamber: [326, 0, 4],
+  ATAKZoomMoveDown: [274, 0, 2], Aim: [324, 0, 0], LeanLeft: [263, 0, 0],
   NVGGainIncrease: [127, 0, 0], Prone: [256, 0, 0], EmergencyReload: [325, 0, 3],
   WalkRight: [262, 0, 2], LasersCycle: [327, 0, 2], HealthMenu: [269, 0, 2],
-  Inspect: [276, 0, 4], Run: [271, 0, 4], ATAKZoomMoveUp: [119, 0, 2],
-  DropWeapon: [121, 0, 0], Firemode: [275, 0, 1], ChamberRound: [326, 0, 2],
-  WalkBackward: [261, 0, 2], Freelook: [300, 0, 0], ReticleBrightnessDecrease: [281, 0, 0],
+  Inspect: [273, 305, 0], Run: [271, 0, 4], ATAKZoomMoveUp: [273, 0, 2],
+  DropWeapon: [121, 0, 0], Firemode: [276, 0, 0], ChamberRound: [326, 0, 0],
+  WalkBackward: [261, 0, 2], Freelook: [300, 0, 2], ReticleBrightnessDecrease: [281, 305, 0],
   ZoomOptics: [276, 0, 2], LeanRight: [265, 0, 0], Sprint: [271, 0, 3],
   Interact: [270, 0, 0], Shoot: [323, 0, 2], SwitchSpecialPurpose: [259, 0, 3],
-  NVGGainDecrease: [277, 0, 0], ATAKZoomCycleFLIR: [102, 0, 0], ReticleBrightnessIncrease: [280, 0, 0],
+  NVGGainDecrease: [277, 0, 0], ATAKZoomCycleFLIR: [46, 0, 0], ReticleBrightnessIncrease: [280, 305, 0],
   Crouch: [46, 0, 0], LasersToggle: [327, 0, 1], SwitchGrenades: [268, 0, 0],
-  HoldBreath: [275, 0, 2], FlashlightsCycle: [278, 0, 2], SwitchBetweenSights: [276, 0, 0],
+  HoldBreath: [275, 0, 2], FlashlightsCycle: [278, 0, 2], SwitchBetweenSights: [274, 0, 0],
   SwitchSecondPrimary: [257, 0, 3], ToggleNVGs: [279, 0, 0], WalkForward: [264, 0, 2],
-  ScopeZeroDown: [274, 0, 2], Vault: [258, 0, 4]
+  ScopeZeroDown: [281, 0, 2], Vault: [258, 0, 4]
 };
 
 // ---- Day / night theme --------------------------------------------------
