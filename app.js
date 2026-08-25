@@ -181,6 +181,32 @@ const PRESET_NUMPAD = {
   ScopeZeroDown: [274, 0, 2], Vault: [258, 0, 4]
 };
 
+// ---- Day / night theme --------------------------------------------------
+// The theme itself is applied by the inline script in <head>, before the first
+// paint. This only handles switching it and remembering the choice.
+const THEME_KEY = 'operatorKeybindEditor.theme';
+const themeToggle = document.getElementById('themeToggle');
+
+function currentTheme() {
+  return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  const toDay = theme === 'dark';
+  themeToggle.textContent = toDay ? '☀ Day' : '☾ Night';
+  themeToggle.title = toDay ? 'Switch to the day theme' : 'Switch to the night theme';
+  themeToggle.setAttribute('aria-label', themeToggle.title);
+}
+
+themeToggle.addEventListener('click', () => {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  try { localStorage.setItem(THEME_KEY, next); } catch (e) { /* private mode: this session only */ }
+});
+
+applyTheme(currentTheme());
+
 const CUSTOM_PRESETS_KEY = 'operatorKeybindEditor.presets';
 function loadCustomPresets() {
   try { return JSON.parse(localStorage.getItem(CUSTOM_PRESETS_KEY)) || {}; } catch (e) { return {}; }

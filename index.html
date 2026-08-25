@@ -4,11 +4,21 @@
 <meta charset="UTF-8">
 <title>OPERATOR — Keybind Editor</title>
 <link rel="stylesheet" href="style.css">
+<script>
+  // Runs before the first paint, otherwise a day-theme visitor gets a black flash.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('operatorKeybindEditor.theme'); } catch (e) {}
+    document.documentElement.dataset.theme =
+      saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  })();
+</script>
 </head>
 <body>
 <div class="wrap">
 
   <header>
+    <button class="themetoggle" id="themeToggle" type="button"></button>
     <div class="title-crt">
       <h1 data-text="OPERATOR // KEYBIND EDITOR">OPERAT<span>O</span>R <span>//</span> KEYBIND EDITOR</h1>
     </div>
